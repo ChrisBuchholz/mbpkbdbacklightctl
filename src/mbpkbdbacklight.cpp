@@ -46,7 +46,6 @@ void set_backlight(int amount) {
 void automate() {}
 
 int main(int argc, char* argv[]) {
-    std::cout << "test" << std::endl;
     if(argc > 1) {
         set_backlight(atoi(argv[1]));
     }
