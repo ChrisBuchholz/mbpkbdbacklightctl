@@ -1,11 +1,13 @@
 CC=g++
-CFLAGS=-c -Wall
+CFLAGS=-Wall
 
-all: mbpkbdbacklight.cpp
+all: mbpkbdbacklight
 
-mbpkbdbacklight.cpp:
+mbpkbdbacklight: src/mbpkbdbacklight.cpp
 	mkdir -p build/
 	$(CC) $(CFLAGS) src/mbpkbdbacklight.cpp -o build/mbpkbdbacklight
+
+.PHONY: clean
 
 clean:
 	rm -rfv build/
