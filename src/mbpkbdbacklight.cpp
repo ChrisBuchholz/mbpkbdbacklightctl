@@ -38,7 +38,7 @@ const int min_brightness = 0;
 const int default_brightness = 75;
 
 /* polling interval */
-const int poll_interval = 5;
+const int poll_interval = 0.2;
 
 /*
  *
@@ -71,7 +71,10 @@ void set_backlight(int brightness) {
  *
  */
 int get_idle_time() {
-    return 0;
+    XScreenSaverInfo *info = XScreenSaverAllocInfo();
+    Display *display = XOpenDisplay(0);
+    XScreenSaverQueryInfo(display, DefaultRootWindow(display), info);
+    return (info->idle / 1000);
 }
 
 /*

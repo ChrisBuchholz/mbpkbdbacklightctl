@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-Wall
+CFLAGS=-Wall -lXss
 
 all: mbpkbdbacklight
 
