@@ -23,24 +23,29 @@
 
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <stdlib.h>
 
-const char* bfile = "/sys/devices/platform/applesmc.768/leds/smc::kbd_backlight/brightness";
-const int initAmount = 75;
+const char* debug_file = "/var/log/mbpkbdbacklight.log";
+const char* brightness_file = "/sys/devices/platform/applesmc.768/leds/smc::kbd_backlight/brightness";
+const int max_brightness = 255;
+const int min_brightness = 0;
+const int default_brightness = 75;
+int brightness = 0;
 
-std::string get_backlight() {
-    std::string amount;
-    std::ifstream file(bfile);
-    getline(file, amount);
-    file.close();
-    return amount;
+void get_backlight() {
+    std::ifstream infile(brightness_file);
+    if(infile.is_open()) {
+        infile >> brightness;
+        infile.close();
+    }
 }
 
 void set_backlight(int amount) {
-    std::ofstream file(bfile);
-    file << amount;
-    file.close();
+    std::ofstream outfile(brightness_file);
+    if(outfile.is_open()) {
+        outfile << amount;
+        outfile.close();
+    }
 }
 
 void automate() {}
@@ -50,10 +55,10 @@ int main(int argc, char* argv[]) {
         set_backlight(atoi(argv[1]));
     }
     else {
-        set_backlight(initAmount);
+        set_backlight(default_brightness);
     }
 
     automate();
-    
+
     return 0;
 }
