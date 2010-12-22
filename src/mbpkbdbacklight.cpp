@@ -24,31 +24,85 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
+#include <X11/extensions/scrnsaver.h>
 
+/* output debugging information to log file */
 const char* debug_file = "/var/log/mbpkbdbacklight.log";
+
+/* brightness file of which brightness value is written to and read from */
 const char* brightness_file = "/sys/devices/platform/applesmc.768/leds/smc::kbd_backlight/brightness";
+
+/* basic brightness parameters */
 const int max_brightness = 255;
 const int min_brightness = 0;
 const int default_brightness = 75;
-int brightness = 0;
 
-void get_backlight() {
+/* polling interval */
+const int poll_interval = 5;
+
+/*
+ *
+ */
+int get_backlight() {
     std::ifstream infile(brightness_file);
     if(infile.is_open()) {
+        int brightness;
         infile >> brightness;
         infile.close();
+        return brightness;
     }
+    return default_brightness;
 }
 
-void set_backlight(int amount) {
+/*
+ * Writes the keyboard backlight brightness value to the system
+ * from second argument which should be an interger value in
+ * the range of min_brightness and max_brightness
+ */
+void set_backlight(int brightness) {
     std::ofstream outfile(brightness_file);
     if(outfile.is_open()) {
-        outfile << amount;
+        outfile << brightness;
         outfile.close();
     }
 }
 
-void automate() {}
+/*
+ *
+ */
+int get_idle_time() {
+    return 0;
+}
+
+/*
+ *
+ */
+void loopdeloop() {
+    int old_brightness,
+        new_brightness;
+    int idle_time = 0,
+        max_idle_time = 5;
+
+    while(1) {
+        old_brightness = get_backlight();
+        new_brightness = old_brightness;
+
+        idle_time = get_idle_time();
+        
+        if(idle_time > max_idle_time && new_brightness > min_brightness) {
+            new_brightness = min_brightness;
+        }
+        else if(idle_time < max_idle_time && new_brightness == min_brightness) {
+            new_brightness = default_brightness;
+        }
+
+        if(new_brightness != old_brightness) {
+            set_backlight(new_brightness);
+        }
+
+        sleep(poll_interval);
+    }
+}
 
 int main(int argc, char* argv[]) {
     if(argc > 1) {
@@ -58,7 +112,7 @@ int main(int argc, char* argv[]) {
         set_backlight(default_brightness);
     }
 
-    automate();
+    loopdeloop();
 
     return 0;
 }
