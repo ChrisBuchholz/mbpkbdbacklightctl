@@ -71,17 +71,11 @@ void set_backlight(int brightness) {
 /*
  *
  */
-unsigned long get_idle_time() {
-    std::string the_display = ":0.0";
-    XScreenSaverInfo *info = XScreenSaverAllocInfo();
-    Display *display = XOpenDisplay(the_display.c_str());
-    if(display != NULL) {
-        XScreenSaverQueryInfo(display, DefaultRootWindow(display), info);
-        XCloseDisplay(display);
-        // convert from milliseconds to seconds and return
-        return ((info->idle) / 1000);
-    }
-    return 0;
+unsigned long get_idle_time(Display *x11_display) {
+    XScreenSaverInfo *x11_info = XScreenSaverAllocInfo();
+    XScreenSaverQueryInfo(x11_display, DefaultRootWindow(x11_display), x11_info);
+    // convert from milliseconds to seconds and return
+    return ((x11_info->idle) / 1000);
 }
 
 /*
@@ -93,24 +87,33 @@ void loopdeloop() {
     int idle_time = 0,
         max_idle_time = 20;
 
-    while(1) {
-        old_brightness = get_backlight();
-        new_brightness = old_brightness;
+    // connect to Xorg display
+    std::string the_display = ":0.0";
+    Display *x11_display = XOpenDisplay(the_display.c_str());
+    if(x11_display != NULL) {
+        while(1) {
+            old_brightness = get_backlight();
+            new_brightness = old_brightness;
+            
+            // query idle time from get_idle_time() and pass along x11_display
+            // x11_display so we dont need to connect to a new XServer display
+            // on every poll
+            idle_time = get_idle_time(x11_display);
+            
+            if(idle_time > max_idle_time && new_brightness > min_brightness) {
+                new_brightness = min_brightness;
+            }
+            else if(idle_time < max_idle_time && new_brightness == min_brightness) {
+                new_brightness = default_brightness;
+            }
 
-        idle_time = get_idle_time();
-        
-        if(idle_time > max_idle_time && new_brightness > min_brightness) {
-            new_brightness = min_brightness;
-        }
-        else if(idle_time < max_idle_time && new_brightness == min_brightness) {
-            new_brightness = default_brightness;
-        }
+            if(new_brightness != old_brightness) {
+                set_backlight(new_brightness);
+            }
 
-        if(new_brightness != old_brightness) {
-            set_backlight(new_brightness);
+            usleep(poll_interval);
         }
-
-        usleep(poll_interval);
+        XCloseDisplay(x11_display);
     }
 }
 
