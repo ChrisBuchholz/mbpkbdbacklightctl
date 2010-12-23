@@ -38,8 +38,8 @@ const int max_brightness = 255;
 const int min_brightness = 0;
 const int default_brightness = 75;
 
-/* polling interval */
-const int poll_interval = 1;
+/* polling interval (in microseconds for uslepp) */
+const int poll_interval = 0.2*1000000;
 
 /*
  *
@@ -90,7 +90,7 @@ void loopdeloop() {
     int old_brightness,
         new_brightness;
     int idle_time = 0,
-        max_idle_time = 5;
+        max_idle_time = 20;
 
     while(1) {
         old_brightness = get_backlight();
@@ -109,7 +109,7 @@ void loopdeloop() {
             set_backlight(new_brightness);
         }
 
-        sleep(poll_interval);
+        usleep(poll_interval);
     }
 }
 
@@ -122,6 +122,6 @@ int main(int argc, char* argv[]) {
     }
 
     loopdeloop();
-
+    
     return 0;
 }
