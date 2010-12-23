@@ -77,6 +77,7 @@ unsigned long get_idle_time() {
     Display *display = XOpenDisplay(the_display.c_str());
     if(display != NULL) {
         XScreenSaverQueryInfo(display, DefaultRootWindow(display), info);
+        XCloseDisplay(display);
         // convert from milliseconds to seconds and return
         return ((info->idle) / 1000);
     }
