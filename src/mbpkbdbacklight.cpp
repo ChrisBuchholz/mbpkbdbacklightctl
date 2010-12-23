@@ -39,7 +39,7 @@ const int min_brightness = 0;
 const int default_brightness = 75;
 
 /* polling interval */
-const int poll_interval = 0.2;
+const int poll_interval = 1;
 
 /*
  *
