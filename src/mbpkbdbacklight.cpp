@@ -38,7 +38,7 @@ const int max_brightness = 255;
 const int min_brightness = 0;
 const int default_brightness = 75;
 
-/* polling interval (in microseconds for uslepp) */
+/* polling interval (in microseconds for usleep) */
 const int poll_interval = 0.2*1000000;
 
 /*
