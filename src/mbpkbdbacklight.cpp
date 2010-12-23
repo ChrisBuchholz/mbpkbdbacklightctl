@@ -23,6 +23,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <stdlib.h>
 #include <X11/extensions/scrnsaver.h>
 
@@ -70,11 +71,16 @@ void set_backlight(int brightness) {
 /*
  *
  */
-int get_idle_time() {
+unsigned long get_idle_time() {
+    std::string the_display = ":0.0";
     XScreenSaverInfo *info = XScreenSaverAllocInfo();
-    Display *display = XOpenDisplay(0);
-    XScreenSaverQueryInfo(display, DefaultRootWindow(display), info);
-    return (info->idle / 1000);
+    Display *display = XOpenDisplay(the_display.c_str());
+    if(display != NULL) {
+        XScreenSaverQueryInfo(display, DefaultRootWindow(display), info);
+        // convert from milliseconds to seconds and return
+        return ((info->idle) / 1000);
+    }
+    return 0;
 }
 
 /*
