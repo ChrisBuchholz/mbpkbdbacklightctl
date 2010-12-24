@@ -4,4 +4,12 @@ but the program can also be called with an argument:
 
     $ mbpkbdbacklight 100
 
-which would set the backlight amount to an value of 100
+which would set the backlight amount to an  value  of 100  and  the  default
+will be set to 100 for this instance of the program
+The optional argument must be an integer in the range of 0 to 255
+
+The program will also turn off the keyboard  backlight  if  no keyboard  and
+mouse events has occured for at least 20 seconds, and will turn it  back  on
+when such event is detected
+
+The program requires libxss to detect idle time of keyboard and mouse events

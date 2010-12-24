@@ -12,10 +12,14 @@
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *  See the GNU General Public License for more details.
  *
- *  v0.1
- *  notes: 
- *      Able to initate an amount and set value to passed argument
- *        if one is given.
+ *  v0.3
+ *  notes:
+ *      Turns off  keyboard backlight when no  keyboard or
+ *      mouse events has been  detected for 20 seconds and
+ *      turns it back on when such event is detected.
+ *      Sets the backlight to an initial amount of 75, but
+ *      accepts an  integer  value as  argument to replace
+ *      the 75 with a value between 0 and 255.
  *
  *  tested on:
  *    MacBook Pro 5,5 13" (Core2Duo 2.53GHz) 
