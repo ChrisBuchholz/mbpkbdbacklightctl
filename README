@@ -1,8 +1,8 @@
-mbpkbdbacklight is program for controlling keyboard backlight on MacBook Pro
+mbpkbdbacklightctl is program for controlling keyboard backlight on MacBook Pro
 When initiated, it  sets the  amount of  backlight to a  default value of 75
 but the program can also be called with an argument:
 
-    $ mbpkbdbacklight 100
+    $ mbpkbdbacklightctl 100
 
 which would set the backlight amount to an  value  of 100  and  the  default
 will be set to 100 for this instance of the program

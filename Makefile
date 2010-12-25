@@ -1,11 +1,11 @@
 CC=g++
 CFLAGS=-g -Wall -lXss
 
-all: mbpkbdbacklight
+all: mbpkbdbacklightctl
 
-mbpkbdbacklight: src/mbpkbdbacklight.cpp
+mbpkbdbacklightctl: src/mbpkbdbacklightctl.cpp
 	mkdir -p build/
-	$(CC) $(CFLAGS) src/mbpkbdbacklight.cpp -o build/mbpkbdbacklight
+	$(CC) $(CFLAGS) src/mbpkbdbacklightctl.cpp -o build/mbpkbdbacklightctl
 
 .PHONY: clean
 

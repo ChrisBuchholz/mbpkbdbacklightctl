@@ -1,5 +1,5 @@
 /*
- *  mbpkbdbacklight.cpp - control  keyboard  backlight  for MacBook Pro
+ *  mbpkbdbacklightctl.cpp - control  keyboard  backlight  for MacBook Pro
  *  Copyright (C) 2010  Chris Buchholz <christoffer.buchholz@gmail.com>
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -32,7 +32,7 @@
 #include <X11/extensions/scrnsaver.h>
 
 /* output debugging information to log file */
-const char* debug_file = "/var/log/mbpkbdbacklight.log";
+const char* debug_file = "/var/log/mbpkbdbacklightctl.log";
 
 /* brightness file of which brightness value is written to and read from */
 const char* brightness_file = "/sys/devices/platform/applesmc.768/leds/smc::kbd_backlight/brightness";
