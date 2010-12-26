@@ -1,15 +1,15 @@
 mbpkbdbacklightctl is program for controlling keyboard backlight on MacBook Pro
-When initiated, it  sets the  amount of  backlight to a  default value of 75
+When initiated, it  sets the  amount of  backlight to a  default  value  of  75
 but the program can also be called with an argument:
 
     $ mbpkbdbacklightctl 100
 
-which would set the backlight amount to an  value  of 100  and  the  default
-will be set to 100 for this instance of the program
-The optional argument must be an integer in the range of 0 to 255
+which would set the backlight  amount  to  an  value  of 100  and  the  default
+will   be   set    to    100    for    this    instance    of    the    program
+The  optional  argument  must  be  an  integer  in  the  range  of  0  to   255
 
-The program will also turn off the keyboard  backlight  if  no keyboard  and
-mouse events has occured for at least 20 seconds, and will turn it  back  on
+The program will also turn off the  keyboard  backlight  if  no  keyboard   and
+mouse events has occured for at least 20 seconds, and  will  turn  it  back  on
 when such event is detected
 
-The program requires libxss to detect idle time of keyboard and mouse events
+The program requires libxss to detect idle time of keyboard  and  mouse  events
