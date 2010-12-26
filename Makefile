@@ -1,4 +1,4 @@
-# mbpkbdbacklightctl.cpp - control keyboard backlight for MacBook Pro
+# mbpkbdbacklightctl - control keyboard backlight for MacBook Pro
 # Copyright (C) 2010  Chris Buchholz <christoffer.buchholz@gmail.com>
 #
 # This file is part of mbpkbdbacklightctl
