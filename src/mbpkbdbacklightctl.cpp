@@ -119,6 +119,12 @@ void loopdeloop() {
         }
         XCloseDisplay(x11_display);
     }
+    else {
+        // grapping a XServer display failed, so we wait
+        // and try again
+        usleep(poll_interval);
+        loopdeloop();
+    }
 }
 
 int main(int argc, char* argv[]) {
