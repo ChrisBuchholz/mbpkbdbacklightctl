@@ -1,28 +1,21 @@
 /*
- *  mbpkbdbacklightctl.cpp - control keyboard backlight for MacBook Pro
- *  Copyright (C) 2010  Chris Buchholz <christoffer.buchholz@gmail.com>
+ * mbpkbdbacklightctl.cpp - control keyboard backlight for MacBook Pro
+ * Copyright (C) 2010  Chris Buchholz <christoffer.buchholz@gmail.com>
  *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation,  either version  3 of  the License, or
- *  (at your option)any later version.
+ * This file is part of mbpkbdbacklightctl
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without  even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *  See the GNU General Public License for more details.
+ * mbpkbdbacklightctl is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *  v0.3
- *  notes:
- *      Turns off  keyboard backlight when no  keyboard or
- *      mouse events has been  detected for 20 seconds and
- *      turns it back on when such event is detected.
- *      Sets the backlight to an initial amount of 75, but
- *      accepts an  integer  value as  argument to replace
- *      the 75 with a value between 0 and 255.
+ * mbpkbdbacklightctl is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  tested on:
- *    MacBook Pro 5,5 13" (Core2Duo 2.53GHz) 
+ * You should have received a copy of the GNU General Public License
+ * along with mbpkbdbacklightctl. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <iostream>
