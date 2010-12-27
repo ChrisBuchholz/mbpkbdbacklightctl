@@ -31,20 +31,20 @@ const char* debug_file = "/var/log/mbpkbdbacklightctl.log";
 const char* brightness_file = "/sys/devices/platform/applesmc.768/leds/smc::kbd_backlight/brightness";
 
 /* basic brightness parameters */
-const int max_brightness = 255;
-const int min_brightness = 0;
-const int default_brightness = 75;
+const unsigned short max_brightness = 255,
+                     min_brightness = 0,
+                     default_brightness = 75;
 
 /* polling interval (in microseconds for usleep) */
-const int poll_interval = 0.2*1000000;
+const unsigned long poll_interval = 0.2*1000000;
 
 /*
  *
  */
-int get_backlight() {
+unsigned short get_backlight() {
     std::ifstream infile(brightness_file);
     if(infile.is_open()) {
-        int brightness;
+        unsigned short brightness;
         infile >> brightness;
         infile.close();
         return brightness;
@@ -57,7 +57,7 @@ int get_backlight() {
  * from second argument which should be an interger value in
  * the range of min_brightness and max_brightness
  */
-void set_backlight(int brightness) {
+void set_backlight(unsigned short brightness) {
     std::ofstream outfile(brightness_file);
     if(outfile.is_open()) {
         outfile << brightness;
@@ -79,10 +79,10 @@ unsigned long get_idle_time(Display *x11_display) {
  *
  */
 void loopdeloop() {
-    int old_brightness,
-        new_brightness;
-    int idle_time = 0,
-        max_idle_time = 20;
+    unsigned short old_brightness,
+                   new_brightness;
+    unsigned short idle_time = 0,
+                   max_idle_time = 20;
 
     // connect to Xorg display
     std::string the_display = ":0.0";
