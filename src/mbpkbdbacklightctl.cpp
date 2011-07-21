@@ -1,6 +1,6 @@
 /*
  * mbpkbdbacklightctl - control keyboard backlight for MacBook Pro
- * Copyright (C) 2010  Chris Buchholz <christoffer.buchholz@gmail.com>
+ * Copyright (C) 2010  chrisbuchholz <http://chrisbuchholz.me/>
  *
  * This file is part of mbpkbdbacklightctl
  *
