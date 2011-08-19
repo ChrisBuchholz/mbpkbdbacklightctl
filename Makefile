@@ -21,9 +21,9 @@ CFLAGS=-g -Wall -lXss
 
 all: mbpkbdbacklightctl
 
-mbpkbdbacklightctl: src/mbpkbdbacklightctl.cpp
+mbpkbdbacklightctl: src/mbpkbdbacklightctl.cc
 	mkdir -p build/
-	$(CC) $(CFLAGS) src/mbpkbdbacklightctl.cpp -o build/mbpkbdbacklightctl
+	$(CC) $(CFLAGS) src/mbpkbdbacklightctl.cc -o build/mbpkbdbacklightctl
 
 .PHONY: clean
 
